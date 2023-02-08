@@ -1,0 +1,20 @@
+[0m[1mvar.vspherepass[0m
+  [1mEnter a value:[0m [0m
+[0m[1mvar.vsphereuser[0m
+  [1mEnter a value:[0m [0m
+[0m[1mdata.vsphere_datacenter.dc: Reading...[0m[0m
+[0m[1mdata.vsphere_datacenter.dc: Read complete after 0s [id=datacenter-2][0m
+[0m[1mdata.vsphere_datastore.datastore: Reading...[0m[0m
+[0m[1mdata.vsphere_network.network: Reading...[0m[0m
+[0m[1mdata.vsphere_compute_cluster.cluster: Reading...[0m[0m
+[0m[1mdata.vsphere_virtual_machine.template: Reading...[0m[0m
+[0m[1mdata.vsphere_datastore.datastore: Read complete after 0s [id=datastore-148952][0m
+[0m[1mdata.vsphere_network.network: Read complete after 0s [id=network-210129][0m
+[0m[1mdata.vsphere_compute_cluster.cluster: Read complete after 0s [id=domain-c148921][0m
+[0m[1mdata.vsphere_virtual_machine.template: Read complete after 0s [id=4202fc00-de7e-36e2-6637-b90b6ea7385c][0m
+
+Interrupt received.
+Please wait for Terraform to exit or data loss may occur.
+Gracefully shutting down...
+
+Stopping operation...
