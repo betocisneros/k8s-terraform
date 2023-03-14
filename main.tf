@@ -1,6 +1,15 @@
 # main.tf
 
 # Configure the vSphere provider
+terraform {
+  required_providers {
+    vsphere = {
+      source = "hashicorp/vsphere"
+      version = "2.2.0"
+    }
+  }
+}
+
 provider "vsphere" {
   user                 = var.vsphereuser
   password             = var.vspherepass
@@ -57,23 +66,28 @@ resource "vsphere_virtual_machine" "CP" {
 
 
   network_interface {
-    network_id = data.vsphere_network.network.id
+    network_id = "${data.vsphere_network.network.id}"
   }
 
   disk {
     label       = "${var.vm-prefix}-${count.index + 1}-diska"
-    size        = 20
+    size        = 60
     unit_number = 0
   }
 
   disk {
     label       = "${var.vm-prefix}-${count.index + 1}-diskb"
-    size        = 20
+    size        = 60
     unit_number = 1
   }
-
+ # cdrom {
+#    client_device = true
+#     datastore_id = "${data.vsphere_datastore.datastore.id}"
+#     path         = "./seed.iso"
+#  }
   clone {
-    template_uuid = data.vsphere_virtual_machine.template.id
+    #template_uuid = "${data.vsphere_virtual_machine.template.id}"
+    template_uuid = data.vsphere_virtual_machine.template.uuid
     customize {
       timeout = 0
 
@@ -122,7 +136,9 @@ resource "vsphere_virtual_machine" "ETCD" {
     size        = 20
     unit_number = 1
   }
-
+  cdrom {
+    client_device = true
+  }
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
     customize {
@@ -160,20 +176,22 @@ resource "vsphere_virtual_machine" "worker" {
   guest_id = var.vm-guest-id
 
   network_interface {
-    network_id = data.vsphere_network.network.id
+    network_id = "${data.vsphere_network.network.id}"
   }
 
   disk {
     label       = "${var.vm-prefix}-${count.index + 1}-diska"
-    size        = 20
+    size        = 60
     unit_number = 0
   }
   disk {
     label       = "${var.vm-prefix}-${count.index + 1}-diskb"
-    size        = 20
+    size        = 60
     unit_number = 1
   }
-
+  cdrom {
+    client_device = true
+  }
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
     customize {
