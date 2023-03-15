@@ -65,8 +65,13 @@ resource "vsphere_virtual_machine" "CP" {
   guest_id = var.vm-guest-id
 
 
+  #network_interface {
+  #  network_id = "${data.vsphere_network.network.id}"
+  #}
+
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
+    adapter_type = "${data.vsphere_virtual_machine.template.network_interface_types[0]}"
   }
 
   disk {
@@ -106,6 +111,21 @@ resource "vsphere_virtual_machine" "CP" {
 
     }
   }
+  
+  /*provisioner "remote-exec" {
+    inline = [
+      "route add -net 10.0.0.0/8 gw 10.1.36.39",
+    ]
+  }
+  connection {
+    type = "ssh"
+    host = "10.1.150.221"
+    user = "root"
+    password = "sEcom2008"
+    port = "22"
+    agent = false
+    }*/
+
 }
 
 # Create ETCD VMs

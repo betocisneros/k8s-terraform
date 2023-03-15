@@ -1,0 +1,5 @@
+salida.plan
+salida.txt
+terraform.tfstate
+terraform.tfstate.backup
+tfplan
